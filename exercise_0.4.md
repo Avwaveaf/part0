@@ -1,6 +1,21 @@
+### Sequence Diagram: User Entry of Note and Save Interaction in ExampleApp
+
+[source](https://studies.cs.helsinki.fi/exampleapp/notes)
+
+Below is a sequence diagram illustrating the interaction between browser and server when user entering a note and clicking save in ExampleApp:
+
+```mermaid
 sequenceDiagram
     participant browser
     participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser: HTTP Status Code 302
+    deactivate server
+
+    Note left of server: The server response with redirect with location /exampleapp/notes
+    Note left of browser: causing browser to Get /notes (redirect)
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
@@ -25,3 +40,4 @@ sequenceDiagram
     deactivate server
 
     Note right of browser: The browser executes the callback function that renders the notes
+
